@@ -1,6 +1,6 @@
 {
   "name": "extract-hoc",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A Babel plugin that enables react-hot-loader to work on HoCs.",
   "main": "babel.js",
   "files": [
@@ -8,7 +8,7 @@
     "babel.js"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "prepublish": "babel src --out-dir lib"
   },
   "repository": {
@@ -28,6 +28,8 @@
   "homepage": "https://github.com/quangbuule/extract-hoc#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.0"
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "jest": "^21.2.1"
   }
 }

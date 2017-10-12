@@ -4,11 +4,15 @@ function extractArguments({ types, path, forDefaultExport }, node) {
   }
 
   node.arguments = node.arguments.map(node => {
-    if (node.type === 'CallExpression') {
+    if (types.isCallExpression(node)) {
       extractArguments({ types, path, forDefaultExport }, node);
     }
 
-    if (node.type === 'Identifier') {
+    if (types.isIdentifier(node)) {
+      return node;
+    }
+
+    if (types.isLiteral(node)) {
       return node;
     }
 
@@ -25,6 +29,14 @@ function extractArguments({ types, path, forDefaultExport }, node) {
   });
 }
 
+function pathToInsertAssignments(path) {
+  while (path.parent.type !== 'Program') {
+    path = path.parentPath;
+  }
+
+  return path;
+}
+
 module.exports = function({ types }) {
   // No-op in production.
   if (process.env.NODE_ENV === 'production') {
@@ -35,7 +47,10 @@ module.exports = function({ types }) {
 
   const Visitor = {
     VariableDeclarator(path) {
-      if (path.parentPath.parent.type !== 'Program') {
+      if (
+        path.parentPath.parent.type !== 'Program' &&
+        path.parentPath.parent.type !== 'ExportNamedDeclaration'
+        ) {
         return;
       }
       if (!path.node.init) {

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extract HoCs for export default declaration 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+
+var _default_arg, _default_arg2;
+
+var level0 = 1;
+_default_arg = baz()(level0)
+_default_arg2 = bar()(_default_arg)
+exports.default = foo()(_default_arg2);"
+`;
+
+exports[`extract HoCs for export named declaration 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+
+var _final_arg, _final_arg2;
+
+var level0 = 1;
+var _final_arg = baz()(level0),
+    _final_arg2 = bar()(_final_arg),
+    final = exports.final = foo()(_final_arg2);"
+`;
+
+exports[`extract HoCs for variable declarator 1`] = `
+"\\"use strict\\";
+
+var _final_arg, _final_arg2;
+
+var level0 = 1;
+var _final_arg = baz()(level0),
+    _final_arg2 = bar()(_final_arg),
+    final = foo()(_final_arg2);"
+`;
