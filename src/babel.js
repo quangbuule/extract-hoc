@@ -16,6 +16,10 @@ function extractArguments({ types, path, forDefaultExport }, node) {
       return node;
     }
 
+    if (types.isSpreadElement(node)) {
+      return node;
+    }
+
     const idName = forDefaultExport ? 'default' : path.node.id.name;
     const id = path.scope.generateUidIdentifier(`${idName}_arg`);
 
